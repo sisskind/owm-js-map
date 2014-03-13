@@ -12,11 +12,13 @@ var map, geocoder, homeButton, hExtent;
           	spatialReference: { wkid:4326 }
 		});
 		
+		/*
 		var locator = new Locator("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+				
+				dojo.connect(map,"onClick",function(evt){
+					locator.locationToAddress(evt.mapPoint,100);
+				});*/
 		
-		dojo.connect(map,"onClick",function(evt){
-			locator.locationToAddress(evt.mapPoint,100);
-		});
 				
 		geocoder = new Geocoder({map: map}, "search");
         geocoder.startup();
@@ -27,7 +29,7 @@ var map, geocoder, homeButton, hExtent;
       	
       	if(navigator.geolocation){
       		navigator.geolocation.getCurrentPosition(function(position){
-      			var locator = new esri.tasks.Locator("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+      			//var locator = new esri.tasks.Locator("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
 				var cP = new esri.geometry.Point(position.coords);
 				console.log(cP.x-.1);
 				hExtent = new Extent(cP.x-.1,cP.y-.1,cP.x+.1,cP.y+.1, new SpatialReference({ wkid:4326 }));
@@ -60,11 +62,13 @@ var map, geocoder, homeButton, hExtent;
        });
 		}
 		
+		/*
 		locator.on("location-to-address-complete", function(evt) {
-          if (evt.address.address) {
-          	alert(evt.address.address);
-          }
-       });
+				  if (evt.address.address) {
+					  alert(evt.address.address);
+				  }
+			   });*/
+		
 		
 		function showLocation(evt){
 			map.graphics.clear();
